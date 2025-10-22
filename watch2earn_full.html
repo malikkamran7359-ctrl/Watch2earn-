@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Watch2Earn — Demo</title>
+  <style>
+    :root{--bg:#000;--gold:#d4af37;--panel:#111;--muted:#aaa}
+    body{margin:0;background:var(--bg);color:#fff;font-family:'Segoe UI',sans-serif;direction:rtl;text-align:right}
+    header{background:#111;padding:15px;text-align:center;border-bottom:1px solid #222}
+    h1{color:var(--gold);margin:0}
+    .container{padding:20px}
+    .section{background:#111;margin:15px 0;padding:15px;border-radius:10px}
+    button{background:var(--gold);border:none;color:#000;padding:10px 15px;border-radius:8px;cursor:pointer}
+    input,select{width:100%;padding:10px;margin-top:5px;margin-bottom:10px;border-radius:8px;border:1px solid #333;background:#000;color:#fff}
+    a{color:var(--gold);text-decoration:none}
+    footer{text-align:center;color:var(--muted);padding:15px 0;border-top:1px solid #222;margin-top:20px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Watch2Earn</h1>
+    <p>ویڈیوز دیکھیں، ریفر کریں، اور کمائیں 💸</p>
+  </header>
+  <div class="container">
+
+    <div class="section">
+      <h2>🏠 ہوم پیج</h2>
+      <p>یہ Watch2Earn ایک ڈیمو سائٹ ہے جہاں آپ 10 سیکنڈ کے اشتہارات دیکھ کر پیسے کما سکتے ہیں۔</p>
+      <button onclick="watchAd()">🎬 ویڈیو دیکھیں</button>
+      <p id="earned">ابھی تک کمائے گئے پیسے: 0 روپے</p>
+    </div>
+
+    <div class="section">
+      <h2>💰 Deposit کریں</h2>
+      <label>رقم (PKR)</label>
+      <input type="number" id="depositAmt" placeholder="مثلاً 100" />
+      <label>ادائیگی کا ذریعہ</label>
+      <select id="method">
+        <option>JazzCash</option>
+        <option>EasyPaisa</option>
+      </select>
+      <label>ٹرانزیکشن آئی ڈی</label>
+      <input type="text" id="txnId" placeholder="اپنی Txn ID لکھیں" />
+      <button onclick="deposit()">جمع کروائیں</button>
+      <p id="depositMsg" style="color:var(--muted)"></p>
+    </div>
+
+    <div class="section">
+      <h2>📨 Invite / Referral</h2>
+      <p>اپنے دوستوں کو ریفر کریں اور اضافی انعام حاصل کریں۔</p>
+      <input type="text" id="refLink" readonly value="https://watch2earn.demo/?ref=12345" />
+      <button onclick="copyRef()">لنک کاپی کریں</button>
+      <p id="refMsg" style="color:var(--muted)"></p>
+    </div>
+
+    <div class="section">
+      <h2>💵 Withdraw</h2>
+      <label>فون نمبر (JazzCash / EasyPaisa)</label>
+      <input type="text" id="withdrawPhone" placeholder="03XXXXXXXXX" />
+      <label>رقم (PKR)</label>
+      <input type="number" id="withdrawAmt" placeholder="مثلاً 200" />
+      <button onclick="withdraw()">وِدڈرال درخواست بھیجیں</button>
+      <p id="withdrawMsg" style="color:var(--muted)"></p>
+    </div>
+
+    <div class="section">
+      <h2>📱 WhatsApp گروپ</h2>
+      <p>اپ ڈیٹس اور سپورٹ کے لیے نیچے دیے گئے بٹن سے گروپ جوائن کریں:</p>
+      <a href="https://chat.whatsapp.com/your-group-code" target="_blank">
+        <button>WhatsApp گروپ جوائن کریں</button>
+      </a>
+    </div>
+  </div>
+
+  <footer>© 2025 Watch2Earn — Dark & Gold Design</footer>
+
+  <script>
+    let earned = 0;
+    function watchAd(){
+      alert("10 سیکنڈ کا اشتہار چل رہا ہے...");
+      setTimeout(()=>{
+        earned += 5;
+        document.getElementById("earned").innerText = "ابھی تک کمائے گئے پیسے: " + earned + " روپے";
+        alert("مبارک ہو! آپ نے 5 روپے کمائے 🎉");
+      },10000);
+    }
+
+    function deposit(){
+      let amt = document.getElementById("depositAmt").value;
+      let id = document.getElementById("txnId").value;
+      if(!amt || !id){
+        alert("براہ کرم رقم اور Txn ID درج کریں!");
+        return;
+      }
+      document.getElementById("depositMsg").innerText = "آپ کی جمع کروانے کی درخواست محفوظ کر لی گئی ہے۔ (Demo)";
+    }
+
+    function copyRef(){
+      let ref = document.getElementById("refLink");
+      ref.select();
+      navigator.clipboard.writeText(ref.value);
+      document.getElementById("refMsg").innerText = "لنک کاپی ہو گیا ✅";
+    }
+
+    function withdraw(){
+      let phone = document.getElementById("withdrawPhone").value;
+      let amt = document.getElementById("withdrawAmt").value;
+      if(!phone || !amt){
+        alert("فون نمبر اور رقم دونوں درج کریں!");
+        return;
+      }
+      document.getElementById("withdrawMsg").innerText = "وِدڈرال کی درخواست جمع ہو گئی (Demo)";
+    }
+  </script>
+</body>
+</html>
